@@ -1,32 +1,17 @@
 import cx_Oracle
 from pprint import pprint
-# cx_Oracle.init_oracle_client(lib_dir=r"/opt/oracle/instantclient_21_3/")
-# try:
-#     con = cx_Oracle.connect('system','oracle','172.17.0.2:1521/xe')
-#     cur = con.cursor()
-#     cur.execute("SELECT * FROM all_tables WHERE OWNER ='ADMIN'")
-#     res = cur.fetchall()
-#     print(res)
-    
-# except cx_Oracle.DatabaseError as e:
-#     print(f"exception {e}")
-# finally:
-#     if cur:
-#         cur.close()
-#     if con:
-#         con.close()
 
 
 class create_db_con():
     def __init__(self):
-        self.user = "system"
-        self.passwd = "oracle"
+        self.user = "" #update credentials here
+        self.passwd = ""
         self.db_url = "172.17.0.2:1521/xe"
         self.con = None
         self.cur = None
     
     def __enter__(self):
-        # cx_Oracle.init_oracle_client(lib_dir=r"/opt/oracle/instantclient_21_3/")
+        cx_Oracle.init_oracle_client(lib_dir=r"/opt/oracle/instantclient_21_3/")
         self.con = cx_Oracle.connect(self.user, self.passwd, self.db_url)
         self.cur = self.con.cursor()
         return self
